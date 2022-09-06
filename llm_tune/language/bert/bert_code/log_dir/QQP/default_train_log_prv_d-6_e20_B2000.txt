@@ -1,0 +1,621 @@
+Namespace(no_progress_bar=True, log_interval=100, log_format=None, tensorboard_logdir='.', tbmf_wrapper=False, seed=0, cpu=False, fp16=False, fp16_no_flatten_grads=False, memory_efficient_fp16=False, fp16_init_scale=128, fp16_scale_window=None, fp16_scale_tolerance=0.0, min_loss_scale=0.0001, threshold_loss_scale=None, user_dir=None, empty_cache_freq=0, criterion='sentence_prediction', tokenizer=None, bpe=None, optimizer='adam', lr_scheduler='polynomial_decay', task='sentence_prediction', num_workers=1, skip_invalid_size_inputs_valid_test=True, max_tokens=8000, max_sentences=50, required_batch_size_multiple=1, dataset_impl=None, train_subset='train', valid_subset='valid', validate_interval=1, validate_interval_updates=1, fixed_validation_seed=None, disable_validation=False, max_tokens_valid=8000, max_sentences_valid=50, curriculum=0, distributed_world_size=1, distributed_rank=0, distributed_backend='nccl', distributed_init_method=None, distributed_port=-1, device_id=0, distributed_no_spawn=False, ddp_backend='c10d', bucket_cap_mb=25, fix_batches_to_gpus=False, find_unused_parameters=True, fast_stat_sync=False, arch='roberta_base', max_epoch=20, max_update=0, clip_norm=0.0, sentence_avg=False, update_freq=[40], lr=[0.0003], min_lr=-1, use_bmuf=False, save_dir='log_dir', restore_file='/home/eb/roberta.base/model.pt', itr_mul=1, reset_dataloader=True, reset_lr_scheduler=False, reset_meters=True, reset_optimizer=True, optimizer_overrides='{}', save_interval=1, save_interval_updates=0, keep_interval_updates=-1, keep_updates_list=[], keep_last_epochs=-1, no_save=False, no_epoch_checkpoints=True, no_last_checkpoints=True, no_best_checkpoints=True, no_save_optimizer_state=False, best_checkpoint_metric='accuracy', maximize_best_checkpoint_metric=True, bert_pooler=True, rel_pos=False, rank=1, linear_eval=False, clip=10.0, sigma=0.6135, sess='default', save_predictions=None, adam_betas='(0.9,0.999)', adam_eps=1e-06, weight_decay=0.0, force_anneal=None, warmup_updates=0, warmup_ratio=0.0, end_learning_rate=0.0, power=1.0, total_num_update=4000, data='../glue_data/QQP-bin', num_classes=2, init_token=0, separator_token=2, regression_target=False, no_shuffle=False, truncate_sequence=True, max_positions=512, dropout=0.1, attention_dropout=0.1, embedding_normalize=True, pooler_dropout=0.1, encoder_layers=12, encoder_embed_dim=768, encoder_ffn_embed_dim=3072, encoder_attention_heads=12, activation_fn='gelu', pooler_activation_fn='tanh', activation_dropout=0.0, encoder_normalize_before=False)
+| [input] dictionary: 50265 types
+| [label] dictionary: 9 types
+| loaded 40430 examples from: ../glue_data/QQP-bin/input0/valid
+| loaded 40430 examples from: ../glue_data/QQP-bin/input1/valid
+| loaded 40430 examples from: ../glue_data/QQP-bin/label/valid
+| Loaded valid with #samples: 40430
+RobertaModel(
+  (decoder): RobertaEncoder(
+    (sentence_encoder): TransformerSentenceEncoder(
+      (embed_tokens): Embedding(50265, 768, padding_idx=1)
+      (embed_positions): LearnedPositionalEmbedding(514, 768, padding_idx=1)
+      (layers): ModuleList(
+        (0): TransformerSentenceEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (in_proj_left): LrkLinear()
+            (in_proj_right): LrkLinear()
+            (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            (out_proj_left): LrkLinear()
+            (out_proj_right): LrkLinear()
+          )
+          (fc1): Linear(in_features=768, out_features=3072, bias=True)
+          (fc2): Linear(in_features=3072, out_features=768, bias=True)
+          (fc1_right): LrkLinear()
+          (fc1_left): LrkLinear()
+          (fc2_right): LrkLinear()
+          (fc2_left): LrkLinear()
+          (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+        (1): TransformerSentenceEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (in_proj_left): LrkLinear()
+            (in_proj_right): LrkLinear()
+            (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            (out_proj_left): LrkLinear()
+            (out_proj_right): LrkLinear()
+          )
+          (fc1): Linear(in_features=768, out_features=3072, bias=True)
+          (fc2): Linear(in_features=3072, out_features=768, bias=True)
+          (fc1_right): LrkLinear()
+          (fc1_left): LrkLinear()
+          (fc2_right): LrkLinear()
+          (fc2_left): LrkLinear()
+          (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+        (2): TransformerSentenceEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (in_proj_left): LrkLinear()
+            (in_proj_right): LrkLinear()
+            (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            (out_proj_left): LrkLinear()
+            (out_proj_right): LrkLinear()
+          )
+          (fc1): Linear(in_features=768, out_features=3072, bias=True)
+          (fc2): Linear(in_features=3072, out_features=768, bias=True)
+          (fc1_right): LrkLinear()
+          (fc1_left): LrkLinear()
+          (fc2_right): LrkLinear()
+          (fc2_left): LrkLinear()
+          (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+        (3): TransformerSentenceEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (in_proj_left): LrkLinear()
+            (in_proj_right): LrkLinear()
+            (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            (out_proj_left): LrkLinear()
+            (out_proj_right): LrkLinear()
+          )
+          (fc1): Linear(in_features=768, out_features=3072, bias=True)
+          (fc2): Linear(in_features=3072, out_features=768, bias=True)
+          (fc1_right): LrkLinear()
+          (fc1_left): LrkLinear()
+          (fc2_right): LrkLinear()
+          (fc2_left): LrkLinear()
+          (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+        (4): TransformerSentenceEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (in_proj_left): LrkLinear()
+            (in_proj_right): LrkLinear()
+            (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            (out_proj_left): LrkLinear()
+            (out_proj_right): LrkLinear()
+          )
+          (fc1): Linear(in_features=768, out_features=3072, bias=True)
+          (fc2): Linear(in_features=3072, out_features=768, bias=True)
+          (fc1_right): LrkLinear()
+          (fc1_left): LrkLinear()
+          (fc2_right): LrkLinear()
+          (fc2_left): LrkLinear()
+          (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+        (5): TransformerSentenceEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (in_proj_left): LrkLinear()
+            (in_proj_right): LrkLinear()
+            (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            (out_proj_left): LrkLinear()
+            (out_proj_right): LrkLinear()
+          )
+          (fc1): Linear(in_features=768, out_features=3072, bias=True)
+          (fc2): Linear(in_features=3072, out_features=768, bias=True)
+          (fc1_right): LrkLinear()
+          (fc1_left): LrkLinear()
+          (fc2_right): LrkLinear()
+          (fc2_left): LrkLinear()
+          (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+        (6): TransformerSentenceEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (in_proj_left): LrkLinear()
+            (in_proj_right): LrkLinear()
+            (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            (out_proj_left): LrkLinear()
+            (out_proj_right): LrkLinear()
+          )
+          (fc1): Linear(in_features=768, out_features=3072, bias=True)
+          (fc2): Linear(in_features=3072, out_features=768, bias=True)
+          (fc1_right): LrkLinear()
+          (fc1_left): LrkLinear()
+          (fc2_right): LrkLinear()
+          (fc2_left): LrkLinear()
+          (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+        (7): TransformerSentenceEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (in_proj_left): LrkLinear()
+            (in_proj_right): LrkLinear()
+            (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            (out_proj_left): LrkLinear()
+            (out_proj_right): LrkLinear()
+          )
+          (fc1): Linear(in_features=768, out_features=3072, bias=True)
+          (fc2): Linear(in_features=3072, out_features=768, bias=True)
+          (fc1_right): LrkLinear()
+          (fc1_left): LrkLinear()
+          (fc2_right): LrkLinear()
+          (fc2_left): LrkLinear()
+          (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+        (8): TransformerSentenceEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (in_proj_left): LrkLinear()
+            (in_proj_right): LrkLinear()
+            (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            (out_proj_left): LrkLinear()
+            (out_proj_right): LrkLinear()
+          )
+          (fc1): Linear(in_features=768, out_features=3072, bias=True)
+          (fc2): Linear(in_features=3072, out_features=768, bias=True)
+          (fc1_right): LrkLinear()
+          (fc1_left): LrkLinear()
+          (fc2_right): LrkLinear()
+          (fc2_left): LrkLinear()
+          (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+        (9): TransformerSentenceEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (in_proj_left): LrkLinear()
+            (in_proj_right): LrkLinear()
+            (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            (out_proj_left): LrkLinear()
+            (out_proj_right): LrkLinear()
+          )
+          (fc1): Linear(in_features=768, out_features=3072, bias=True)
+          (fc2): Linear(in_features=3072, out_features=768, bias=True)
+          (fc1_right): LrkLinear()
+          (fc1_left): LrkLinear()
+          (fc2_right): LrkLinear()
+          (fc2_left): LrkLinear()
+          (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+        (10): TransformerSentenceEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (in_proj_left): LrkLinear()
+            (in_proj_right): LrkLinear()
+            (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            (out_proj_left): LrkLinear()
+            (out_proj_right): LrkLinear()
+          )
+          (fc1): Linear(in_features=768, out_features=3072, bias=True)
+          (fc2): Linear(in_features=3072, out_features=768, bias=True)
+          (fc1_right): LrkLinear()
+          (fc1_left): LrkLinear()
+          (fc2_right): LrkLinear()
+          (fc2_left): LrkLinear()
+          (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+        (11): TransformerSentenceEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (in_proj_left): LrkLinear()
+            (in_proj_right): LrkLinear()
+            (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            (out_proj_left): LrkLinear()
+            (out_proj_right): LrkLinear()
+          )
+          (fc1): Linear(in_features=768, out_features=3072, bias=True)
+          (fc2): Linear(in_features=3072, out_features=768, bias=True)
+          (fc1_right): LrkLinear()
+          (fc1_left): LrkLinear()
+          (fc2_right): LrkLinear()
+          (fc2_left): LrkLinear()
+          (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+      )
+      (emb_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+    )
+    (lm_head): RobertaLMHead(
+      (dense): Linear(in_features=768, out_features=768, bias=True)
+      (layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+    )
+  )
+  (classification_heads): ModuleDict(
+    (sentence_classification_head): RobertaClassificationHead(
+      (dropout): Dropout(p=0.1, inplace=False)
+      (out_proj): Linear(in_features=768, out_features=2, bias=True)
+    )
+  )
+)
+| model roberta_base, criterion SentencePredictionCriterion
+| num. model params: 124845659 (num. trained: 124845659)
+| training on 1 GPUs
+| max tokens per GPU = 8000 and max sentences per GPU = 50
+Overwriting classification_heads.sentence_classification_head.out_proj.weight
+Overwriting classification_heads.sentence_classification_head.out_proj.bias
+Find missing keys when loading: ['decoder.sentence_encoder.layers.0.self_attn.in_proj_left.weight', 'decoder.sentence_encoder.layers.0.self_attn.in_proj_right.weight', 'decoder.sentence_encoder.layers.0.self_attn.out_proj_left.weight', 'decoder.sentence_encoder.layers.0.self_attn.out_proj_right.weight', 'decoder.sentence_encoder.layers.0.fc1_right.weight', 'decoder.sentence_encoder.layers.0.fc1_left.weight', 'decoder.sentence_encoder.layers.0.fc2_right.weight', 'decoder.sentence_encoder.layers.0.fc2_left.weight', 'decoder.sentence_encoder.layers.1.self_attn.in_proj_left.weight', 'decoder.sentence_encoder.layers.1.self_attn.in_proj_right.weight', 'decoder.sentence_encoder.layers.1.self_attn.out_proj_left.weight', 'decoder.sentence_encoder.layers.1.self_attn.out_proj_right.weight', 'decoder.sentence_encoder.layers.1.fc1_right.weight', 'decoder.sentence_encoder.layers.1.fc1_left.weight', 'decoder.sentence_encoder.layers.1.fc2_right.weight', 'decoder.sentence_encoder.layers.1.fc2_left.weight', 'decoder.sentence_encoder.layers.2.self_attn.in_proj_left.weight', 'decoder.sentence_encoder.layers.2.self_attn.in_proj_right.weight', 'decoder.sentence_encoder.layers.2.self_attn.out_proj_left.weight', 'decoder.sentence_encoder.layers.2.self_attn.out_proj_right.weight', 'decoder.sentence_encoder.layers.2.fc1_right.weight', 'decoder.sentence_encoder.layers.2.fc1_left.weight', 'decoder.sentence_encoder.layers.2.fc2_right.weight', 'decoder.sentence_encoder.layers.2.fc2_left.weight', 'decoder.sentence_encoder.layers.3.self_attn.in_proj_left.weight', 'decoder.sentence_encoder.layers.3.self_attn.in_proj_right.weight', 'decoder.sentence_encoder.layers.3.self_attn.out_proj_left.weight', 'decoder.sentence_encoder.layers.3.self_attn.out_proj_right.weight', 'decoder.sentence_encoder.layers.3.fc1_right.weight', 'decoder.sentence_encoder.layers.3.fc1_left.weight', 'decoder.sentence_encoder.layers.3.fc2_right.weight', 'decoder.sentence_encoder.layers.3.fc2_left.weight', 'decoder.sentence_encoder.layers.4.self_attn.in_proj_left.weight', 'decoder.sentence_encoder.layers.4.self_attn.in_proj_right.weight', 'decoder.sentence_encoder.layers.4.self_attn.out_proj_left.weight', 'decoder.sentence_encoder.layers.4.self_attn.out_proj_right.weight', 'decoder.sentence_encoder.layers.4.fc1_right.weight', 'decoder.sentence_encoder.layers.4.fc1_left.weight', 'decoder.sentence_encoder.layers.4.fc2_right.weight', 'decoder.sentence_encoder.layers.4.fc2_left.weight', 'decoder.sentence_encoder.layers.5.self_attn.in_proj_left.weight', 'decoder.sentence_encoder.layers.5.self_attn.in_proj_right.weight', 'decoder.sentence_encoder.layers.5.self_attn.out_proj_left.weight', 'decoder.sentence_encoder.layers.5.self_attn.out_proj_right.weight', 'decoder.sentence_encoder.layers.5.fc1_right.weight', 'decoder.sentence_encoder.layers.5.fc1_left.weight', 'decoder.sentence_encoder.layers.5.fc2_right.weight', 'decoder.sentence_encoder.layers.5.fc2_left.weight', 'decoder.sentence_encoder.layers.6.self_attn.in_proj_left.weight', 'decoder.sentence_encoder.layers.6.self_attn.in_proj_right.weight', 'decoder.sentence_encoder.layers.6.self_attn.out_proj_left.weight', 'decoder.sentence_encoder.layers.6.self_attn.out_proj_right.weight', 'decoder.sentence_encoder.layers.6.fc1_right.weight', 'decoder.sentence_encoder.layers.6.fc1_left.weight', 'decoder.sentence_encoder.layers.6.fc2_right.weight', 'decoder.sentence_encoder.layers.6.fc2_left.weight', 'decoder.sentence_encoder.layers.7.self_attn.in_proj_left.weight', 'decoder.sentence_encoder.layers.7.self_attn.in_proj_right.weight', 'decoder.sentence_encoder.layers.7.self_attn.out_proj_left.weight', 'decoder.sentence_encoder.layers.7.self_attn.out_proj_right.weight', 'decoder.sentence_encoder.layers.7.fc1_right.weight', 'decoder.sentence_encoder.layers.7.fc1_left.weight', 'decoder.sentence_encoder.layers.7.fc2_right.weight', 'decoder.sentence_encoder.layers.7.fc2_left.weight', 'decoder.sentence_encoder.layers.8.self_attn.in_proj_left.weight', 'decoder.sentence_encoder.layers.8.self_attn.in_proj_right.weight', 'decoder.sentence_encoder.layers.8.self_attn.out_proj_left.weight', 'decoder.sentence_encoder.layers.8.self_attn.out_proj_right.weight', 'decoder.sentence_encoder.layers.8.fc1_right.weight', 'decoder.sentence_encoder.layers.8.fc1_left.weight', 'decoder.sentence_encoder.layers.8.fc2_right.weight', 'decoder.sentence_encoder.layers.8.fc2_left.weight', 'decoder.sentence_encoder.layers.9.self_attn.in_proj_left.weight', 'decoder.sentence_encoder.layers.9.self_attn.in_proj_right.weight', 'decoder.sentence_encoder.layers.9.self_attn.out_proj_left.weight', 'decoder.sentence_encoder.layers.9.self_attn.out_proj_right.weight', 'decoder.sentence_encoder.layers.9.fc1_right.weight', 'decoder.sentence_encoder.layers.9.fc1_left.weight', 'decoder.sentence_encoder.layers.9.fc2_right.weight', 'decoder.sentence_encoder.layers.9.fc2_left.weight', 'decoder.sentence_encoder.layers.10.self_attn.in_proj_left.weight', 'decoder.sentence_encoder.layers.10.self_attn.in_proj_right.weight', 'decoder.sentence_encoder.layers.10.self_attn.out_proj_left.weight', 'decoder.sentence_encoder.layers.10.self_attn.out_proj_right.weight', 'decoder.sentence_encoder.layers.10.fc1_right.weight', 'decoder.sentence_encoder.layers.10.fc1_left.weight', 'decoder.sentence_encoder.layers.10.fc2_right.weight', 'decoder.sentence_encoder.layers.10.fc2_left.weight', 'decoder.sentence_encoder.layers.11.self_attn.in_proj_left.weight', 'decoder.sentence_encoder.layers.11.self_attn.in_proj_right.weight', 'decoder.sentence_encoder.layers.11.self_attn.out_proj_left.weight', 'decoder.sentence_encoder.layers.11.self_attn.out_proj_right.weight', 'decoder.sentence_encoder.layers.11.fc1_right.weight', 'decoder.sentence_encoder.layers.11.fc1_left.weight', 'decoder.sentence_encoder.layers.11.fc2_right.weight', 'decoder.sentence_encoder.layers.11.fc2_left.weight']
+| loaded checkpoint /home/eb/roberta.base/model.pt (epoch 0 @ 0 updates)
+adding classification_heads.sentence_classification_head.out_proj.weight to params list
+adding classification_heads.sentence_classification_head.out_proj.bias to params list
+| NOTICE: your device may support faster training with --fp16
+| loading train data for epoch 0
+| loaded 363846 examples from: ../glue_data/QQP-bin/input0/train
+| loaded 363846 examples from: ../glue_data/QQP-bin/input1/train
+| loaded 363846 examples from: ../glue_data/QQP-bin/label/train
+| Loaded train with #samples: 363846
+mean:-1.250e-02,  std: 1.315e-01,  Norm: 820.586 <- decoder.sentence_encoder.embed_tokens.weight
+mean: 4.032e-04,  std: 6.631e-02,  Norm:  41.662 <- decoder.sentence_encoder.embed_positions.weight
+mean: 7.247e-05,  std: 8.562e-02,  Norm: 113.889 <- decoder.sentence_encoder.layers.0.self_attn.in_proj_weight
+mean:-5.806e-03,  std: 1.979e-01,  Norm:   9.503 <- decoder.sentence_encoder.layers.0.self_attn.in_proj_bias
+mean: 3.293e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.0.self_attn.in_proj_left.weight
+mean: 9.888e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.0.self_attn.in_proj_right.weight
+mean: 4.115e-06,  std: 3.831e-02,  Norm:  29.420 <- decoder.sentence_encoder.layers.0.self_attn.out_proj.weight
+mean:-2.401e-03,  std: 8.666e-02,  Norm:   2.401 <- decoder.sentence_encoder.layers.0.self_attn.out_proj.bias
+mean:-1.653e-07,  std: 1.654e-07,  Norm:   0.000 <- decoder.sentence_encoder.layers.0.self_attn.out_proj_left.weight
+mean:-1.660e-07,  std: 1.661e-07,  Norm:   0.000 <- decoder.sentence_encoder.layers.0.self_attn.out_proj_right.weight
+mean:-9.072e-03,  std: 5.503e-02,  Norm:  85.664 <- decoder.sentence_encoder.layers.0.fc1.weight
+mean:-9.953e-02,  std: 8.219e-02,  Norm:   7.153 <- decoder.sentence_encoder.layers.0.fc1.bias
+mean:-1.187e-05,  std: 4.520e-02,  Norm:  69.426 <- decoder.sentence_encoder.layers.0.fc2.weight
+mean:-2.562e-03,  std: 8.050e-02,  Norm:   2.230 <- decoder.sentence_encoder.layers.0.fc2.bias
+mean: 1.144e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.0.fc1_right.weight
+mean: 2.861e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.0.fc1_left.weight
+mean: 2.864e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.0.fc2_right.weight
+mean: 1.147e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.0.fc2_left.weight
+mean: 5.651e-01,  std: 1.042e-01,  Norm:  15.925 <- decoder.sentence_encoder.layers.0.final_layer_norm.weight
+mean: 3.024e-02,  std: 1.243e-01,  Norm:   3.544 <- decoder.sentence_encoder.layers.0.final_layer_norm.bias
+mean: 6.056e-01,  std: 7.949e-02,  Norm:  16.926 <- decoder.sentence_encoder.layers.0.self_attn_layer_norm.weight
+mean: 1.056e-01,  std: 1.639e-01,  Norm:   5.400 <- decoder.sentence_encoder.layers.0.self_attn_layer_norm.bias
+mean: 1.101e-04,  std: 6.523e-02,  Norm:  86.775 <- decoder.sentence_encoder.layers.1.self_attn.in_proj_weight
+mean: 1.191e-03,  std: 1.419e-01,  Norm:   6.808 <- decoder.sentence_encoder.layers.1.self_attn.in_proj_bias
+mean:-1.513e-07,  std: 1.514e-07,  Norm:   0.000 <- decoder.sentence_encoder.layers.1.self_attn.in_proj_left.weight
+mean:-1.528e-07,  std: 1.529e-07,  Norm:   0.000 <- decoder.sentence_encoder.layers.1.self_attn.in_proj_right.weight
+mean:-2.499e-05,  std: 3.800e-02,  Norm:  29.188 <- decoder.sentence_encoder.layers.1.self_attn.out_proj.weight
+mean:-5.277e-03,  std: 8.692e-02,  Norm:   2.412 <- decoder.sentence_encoder.layers.1.self_attn.out_proj.bias
+mean:-1.564e-07,  std: 1.565e-07,  Norm:   0.000 <- decoder.sentence_encoder.layers.1.self_attn.out_proj_left.weight
+mean:-1.571e-07,  std: 1.572e-07,  Norm:   0.000 <- decoder.sentence_encoder.layers.1.self_attn.out_proj_right.weight
+mean:-1.191e-02,  std: 5.949e-02,  Norm:  93.188 <- decoder.sentence_encoder.layers.1.fc1.weight
+mean:-9.071e-02,  std: 7.375e-02,  Norm:   6.480 <- decoder.sentence_encoder.layers.1.fc1.bias
+mean: 6.007e-05,  std: 4.702e-02,  Norm:  72.223 <- decoder.sentence_encoder.layers.1.fc2.weight
+mean:-3.393e-04,  std: 7.443e-02,  Norm:   2.061 <- decoder.sentence_encoder.layers.1.fc2.bias
+mean:-1.316e-07,  std: 1.317e-07,  Norm:   0.000 <- decoder.sentence_encoder.layers.1.fc1_right.weight
+mean:-1.334e-07,  std: 1.334e-07,  Norm:   0.000 <- decoder.sentence_encoder.layers.1.fc1_left.weight
+mean: 4.484e-44,  std: 0.000e+00,  Norm:   0.000 <- decoder.sentence_encoder.layers.1.fc2_right.weight
+mean:-1.352e-07,  std: 1.352e-07,  Norm:   0.000 <- decoder.sentence_encoder.layers.1.fc2_left.weight
+mean: 6.294e-01,  std: 1.137e-01,  Norm:  17.724 <- decoder.sentence_encoder.layers.1.final_layer_norm.weight
+mean: 3.739e-02,  std: 6.620e-02,  Norm:   2.106 <- decoder.sentence_encoder.layers.1.final_layer_norm.bias
+mean: 6.660e-01,  std: 1.149e-01,  Norm:  18.729 <- decoder.sentence_encoder.layers.1.self_attn_layer_norm.weight
+mean: 1.216e-01,  std: 9.514e-02,  Norm:   4.278 <- decoder.sentence_encoder.layers.1.self_attn_layer_norm.bias
+mean:-6.182e-04,  std: 6.110e-02,  Norm:  81.275 <- decoder.sentence_encoder.layers.2.self_attn.in_proj_weight
+mean:-7.206e-03,  std: 9.856e-02,  Norm:   4.742 <- decoder.sentence_encoder.layers.2.self_attn.in_proj_bias
+mean: 3.459e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.2.self_attn.in_proj_left.weight
+mean: 1.039e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.2.self_attn.in_proj_right.weight
+mean: 3.430e-05,  std: 3.996e-02,  Norm:  30.692 <- decoder.sentence_encoder.layers.2.self_attn.out_proj.weight
+mean:-1.600e-03,  std: 7.212e-02,  Norm:   1.998 <- decoder.sentence_encoder.layers.2.self_attn.out_proj.bias
+mean: 1.040e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.2.self_attn.out_proj_left.weight
+mean: 1.040e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.2.self_attn.out_proj_right.weight
+mean:-9.943e-03,  std: 6.112e-02,  Norm:  95.108 <- decoder.sentence_encoder.layers.2.fc1.weight
+mean:-9.195e-02,  std: 8.131e-02,  Norm:   6.803 <- decoder.sentence_encoder.layers.2.fc1.bias
+mean: 2.635e-05,  std: 4.833e-02,  Norm:  74.235 <- decoder.sentence_encoder.layers.2.fc2.weight
+mean:-9.743e-04,  std: 8.903e-02,  Norm:   2.466 <- decoder.sentence_encoder.layers.2.fc2.bias
+mean: 1.042e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.2.fc1_right.weight
+mean: 2.606e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.2.fc1_left.weight
+mean: 2.609e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.2.fc2_right.weight
+mean: 1.045e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.2.fc2_left.weight
+mean: 6.646e-01,  std: 1.116e-01,  Norm:  18.675 <- decoder.sentence_encoder.layers.2.final_layer_norm.weight
+mean: 3.579e-02,  std: 5.291e-02,  Norm:   1.770 <- decoder.sentence_encoder.layers.2.final_layer_norm.bias
+mean: 7.652e-01,  std: 1.206e-01,  Norm:  21.467 <- decoder.sentence_encoder.layers.2.self_attn_layer_norm.weight
+mean: 9.346e-02,  std: 6.638e-02,  Norm:   3.176 <- decoder.sentence_encoder.layers.2.self_attn_layer_norm.bias
+mean: 8.044e-05,  std: 6.365e-02,  Norm:  84.674 <- decoder.sentence_encoder.layers.3.self_attn.in_proj_weight
+mean: 1.124e-03,  std: 9.590e-02,  Norm:   4.603 <- decoder.sentence_encoder.layers.3.self_attn.in_proj_bias
+mean: 3.487e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.3.self_attn.in_proj_left.weight
+mean: 1.047e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.3.self_attn.in_proj_right.weight
+mean:-1.120e-05,  std: 4.289e-02,  Norm:  32.940 <- decoder.sentence_encoder.layers.3.self_attn.out_proj.weight
+mean:-1.078e-03,  std: 6.944e-02,  Norm:   1.923 <- decoder.sentence_encoder.layers.3.self_attn.out_proj.bias
+mean: 1.049e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.3.self_attn.out_proj_left.weight
+mean: 1.049e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.3.self_attn.out_proj_right.weight
+mean:-8.211e-03,  std: 6.000e-02,  Norm:  93.025 <- decoder.sentence_encoder.layers.3.fc1.weight
+mean:-8.398e-02,  std: 8.141e-02,  Norm:   6.482 <- decoder.sentence_encoder.layers.3.fc1.bias
+mean: 7.544e-05,  std: 4.732e-02,  Norm:  72.691 <- decoder.sentence_encoder.layers.3.fc2.weight
+mean:-6.227e-04,  std: 8.460e-02,  Norm:   2.343 <- decoder.sentence_encoder.layers.3.fc2.bias
+mean: 1.051e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.3.fc1_right.weight
+mean: 5.255e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.3.fc1_left.weight
+mean: 2.630e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.3.fc2_right.weight
+mean: 1.053e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.3.fc2_left.weight
+mean: 6.780e-01,  std: 1.138e-01,  Norm:  19.051 <- decoder.sentence_encoder.layers.3.final_layer_norm.weight
+mean: 3.548e-02,  std: 5.575e-02,  Norm:   1.831 <- decoder.sentence_encoder.layers.3.final_layer_norm.bias
+mean: 7.906e-01,  std: 1.237e-01,  Norm:  22.176 <- decoder.sentence_encoder.layers.3.self_attn_layer_norm.weight
+mean: 8.226e-02,  std: 7.225e-02,  Norm:   3.033 <- decoder.sentence_encoder.layers.3.self_attn_layer_norm.bias
+mean: 2.484e-04,  std: 6.486e-02,  Norm:  86.275 <- decoder.sentence_encoder.layers.4.self_attn.in_proj_weight
+mean: 1.809e-03,  std: 7.920e-02,  Norm:   3.802 <- decoder.sentence_encoder.layers.4.self_attn.in_proj_bias
+mean: 3.515e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.4.self_attn.in_proj_left.weight
+mean: 1.055e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.4.self_attn.in_proj_right.weight
+mean: 1.859e-05,  std: 4.231e-02,  Norm:  32.498 <- decoder.sentence_encoder.layers.4.self_attn.out_proj.weight
+mean:-1.436e-03,  std: 7.451e-02,  Norm:   2.064 <- decoder.sentence_encoder.layers.4.self_attn.out_proj.bias
+mean: 1.057e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.4.self_attn.out_proj_left.weight
+mean: 1.057e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.4.self_attn.out_proj_right.weight
+mean:-7.612e-03,  std: 5.640e-02,  Norm:  87.415 <- decoder.sentence_encoder.layers.4.fc1.weight
+mean:-8.165e-02,  std: 8.556e-02,  Norm:   6.555 <- decoder.sentence_encoder.layers.4.fc1.bias
+mean: 6.837e-05,  std: 4.395e-02,  Norm:  67.509 <- decoder.sentence_encoder.layers.4.fc2.weight
+mean:-8.379e-04,  std: 7.714e-02,  Norm:   2.136 <- decoder.sentence_encoder.layers.4.fc2.bias
+mean: 1.059e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.4.fc1_right.weight
+mean: 2.648e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.4.fc1_left.weight
+mean: 2.651e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.4.fc2_right.weight
+mean: 1.062e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.4.fc2_left.weight
+mean: 7.283e-01,  std: 1.068e-01,  Norm:  20.399 <- decoder.sentence_encoder.layers.4.final_layer_norm.weight
+mean: 3.267e-02,  std: 5.149e-02,  Norm:   1.689 <- decoder.sentence_encoder.layers.4.final_layer_norm.bias
+mean: 8.158e-01,  std: 1.175e-01,  Norm:  22.841 <- decoder.sentence_encoder.layers.4.self_attn_layer_norm.weight
+mean: 7.847e-02,  std: 6.324e-02,  Norm:   2.792 <- decoder.sentence_encoder.layers.4.self_attn_layer_norm.bias
+mean: 3.197e-05,  std: 6.277e-02,  Norm:  83.499 <- decoder.sentence_encoder.layers.5.self_attn.in_proj_weight
+mean: 4.164e-04,  std: 7.387e-02,  Norm:   3.545 <- decoder.sentence_encoder.layers.5.self_attn.in_proj_bias
+mean: 3.544e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.5.self_attn.in_proj_left.weight
+mean: 1.064e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.5.self_attn.in_proj_right.weight
+mean: 1.444e-05,  std: 4.442e-02,  Norm:  34.116 <- decoder.sentence_encoder.layers.5.self_attn.out_proj.weight
+mean:-1.007e-03,  std: 6.966e-02,  Norm:   1.929 <- decoder.sentence_encoder.layers.5.self_attn.out_proj.bias
+mean: 1.065e+21,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.5.self_attn.out_proj_left.weight
+mean: 4.771e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.5.self_attn.out_proj_right.weight
+mean:-5.949e-03,  std: 5.335e-02,  Norm:  82.460 <- decoder.sentence_encoder.layers.5.fc1.weight
+mean:-7.127e-02,  std: 8.039e-02,  Norm:   5.954 <- decoder.sentence_encoder.layers.5.fc1.bias
+mean: 7.018e-05,  std: 4.133e-02,  Norm:  63.476 <- decoder.sentence_encoder.layers.5.fc2.weight
+mean:-1.814e-05,  std: 7.158e-02,  Norm:   1.982 <- decoder.sentence_encoder.layers.5.fc2.bias
+mean:-2.130e-07,  std: 2.132e-07,  Norm:   0.000 <- decoder.sentence_encoder.layers.5.fc1_right.weight
+mean: 1.332e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.5.fc1_left.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.5.fc2_right.weight
+mean: 5.346e+20,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.5.fc2_left.weight
+mean: 7.261e-01,  std: 1.054e-01,  Norm:  20.332 <- decoder.sentence_encoder.layers.5.final_layer_norm.weight
+mean: 2.508e-02,  std: 4.678e-02,  Norm:   1.470 <- decoder.sentence_encoder.layers.5.final_layer_norm.bias
+mean: 8.266e-01,  std: 1.134e-01,  Norm:  23.120 <- decoder.sentence_encoder.layers.5.self_attn_layer_norm.weight
+mean: 6.519e-02,  std: 5.779e-02,  Norm:   2.414 <- decoder.sentence_encoder.layers.5.self_attn_layer_norm.bias
+mean: 2.170e-05,  std: 6.247e-02,  Norm:  83.094 <- decoder.sentence_encoder.layers.6.self_attn.in_proj_weight
+mean: 7.925e-04,  std: 4.772e-02,  Norm:   2.290 <- decoder.sentence_encoder.layers.6.self_attn.in_proj_bias
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.6.self_attn.in_proj_left.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.6.self_attn.in_proj_right.weight
+mean: 2.992e-05,  std: 4.416e-02,  Norm:  33.916 <- decoder.sentence_encoder.layers.6.self_attn.out_proj.weight
+mean:-1.546e-03,  std: 7.053e-02,  Norm:   1.954 <- decoder.sentence_encoder.layers.6.self_attn.out_proj.bias
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.6.self_attn.out_proj_left.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.6.self_attn.out_proj_right.weight
+mean:-7.546e-03,  std: 5.574e-02,  Norm:  86.395 <- decoder.sentence_encoder.layers.6.fc1.weight
+mean:-7.627e-02,  std: 9.122e-02,  Norm:   6.590 <- decoder.sentence_encoder.layers.6.fc1.bias
+mean: 9.124e-05,  std: 4.348e-02,  Norm:  66.790 <- decoder.sentence_encoder.layers.6.fc2.weight
+mean: 1.778e-03,  std: 6.204e-02,  Norm:   1.719 <- decoder.sentence_encoder.layers.6.fc2.bias
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.6.fc1_right.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.6.fc1_left.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.6.fc2_right.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.6.fc2_left.weight
+mean: 7.311e-01,  std: 1.129e-01,  Norm:  20.501 <- decoder.sentence_encoder.layers.6.final_layer_norm.weight
+mean: 2.847e-02,  std: 3.883e-02,  Norm:   1.334 <- decoder.sentence_encoder.layers.6.final_layer_norm.bias
+mean: 8.063e-01,  std: 1.109e-01,  Norm:  22.556 <- decoder.sentence_encoder.layers.6.self_attn_layer_norm.weight
+mean: 6.924e-02,  std: 6.639e-02,  Norm:   2.657 <- decoder.sentence_encoder.layers.6.self_attn_layer_norm.bias
+mean:-4.785e-05,  std: 6.455e-02,  Norm:  85.868 <- decoder.sentence_encoder.layers.7.self_attn.in_proj_weight
+mean:-6.820e-04,  std: 5.352e-02,  Norm:   2.568 <- decoder.sentence_encoder.layers.7.self_attn.in_proj_bias
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.7.self_attn.in_proj_left.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.7.self_attn.in_proj_right.weight
+mean:-1.342e-07,  std: 3.664e-02,  Norm:  28.141 <- decoder.sentence_encoder.layers.7.self_attn.out_proj.weight
+mean:-1.006e-04,  std: 6.612e-02,  Norm:   1.831 <- decoder.sentence_encoder.layers.7.self_attn.out_proj.bias
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.7.self_attn.out_proj_left.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.7.self_attn.out_proj_right.weight
+mean:-6.198e-03,  std: 5.636e-02,  Norm:  87.089 <- decoder.sentence_encoder.layers.7.fc1.weight
+mean:-7.051e-02,  std: 9.248e-02,  Norm:   6.445 <- decoder.sentence_encoder.layers.7.fc1.bias
+mean: 1.265e-04,  std: 4.464e-02,  Norm:  68.568 <- decoder.sentence_encoder.layers.7.fc2.weight
+mean: 1.748e-03,  std: 6.070e-02,  Norm:   1.682 <- decoder.sentence_encoder.layers.7.fc2.bias
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.7.fc1_right.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.7.fc1_left.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.7.fc2_right.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.7.fc2_left.weight
+mean: 7.660e-01,  std: 9.930e-02,  Norm:  21.405 <- decoder.sentence_encoder.layers.7.final_layer_norm.weight
+mean: 3.052e-02,  std: 3.350e-02,  Norm:   1.255 <- decoder.sentence_encoder.layers.7.final_layer_norm.bias
+mean: 8.285e-01,  std: 1.077e-01,  Norm:  23.153 <- decoder.sentence_encoder.layers.7.self_attn_layer_norm.weight
+mean: 6.249e-02,  std: 5.558e-02,  Norm:   2.317 <- decoder.sentence_encoder.layers.7.self_attn_layer_norm.bias
+mean: 2.529e-05,  std: 6.037e-02,  Norm:  80.300 <- decoder.sentence_encoder.layers.8.self_attn.in_proj_weight
+mean: 1.324e-03,  std: 6.806e-02,  Norm:   3.267 <- decoder.sentence_encoder.layers.8.self_attn.in_proj_bias
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.8.self_attn.in_proj_left.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.8.self_attn.in_proj_right.weight
+mean:-1.309e-05,  std: 3.674e-02,  Norm:  28.216 <- decoder.sentence_encoder.layers.8.self_attn.out_proj.weight
+mean:-1.575e-03,  std: 6.645e-02,  Norm:   1.841 <- decoder.sentence_encoder.layers.8.self_attn.out_proj.bias
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.8.self_attn.out_proj_left.weight
+mean: 1.919e+35,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.8.self_attn.out_proj_right.weight
+mean:-7.986e-03,  std: 5.468e-02,  Norm:  84.873 <- decoder.sentence_encoder.layers.8.fc1.weight
+mean:-6.974e-02,  std: 9.272e-02,  Norm:   6.430 <- decoder.sentence_encoder.layers.8.fc1.bias
+mean: 1.310e-04,  std: 4.487e-02,  Norm:  68.915 <- decoder.sentence_encoder.layers.8.fc2.weight
+mean: 3.460e-03,  std: 5.973e-02,  Norm:   1.657 <- decoder.sentence_encoder.layers.8.fc2.bias
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.8.fc1_right.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.8.fc1_left.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.8.fc2_right.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.8.fc2_left.weight
+mean: 7.981e-01,  std: 8.621e-02,  Norm:  22.247 <- decoder.sentence_encoder.layers.8.final_layer_norm.weight
+mean: 3.646e-02,  std: 4.098e-02,  Norm:   1.519 <- decoder.sentence_encoder.layers.8.final_layer_norm.bias
+mean: 8.433e-01,  std: 1.004e-01,  Norm:  23.536 <- decoder.sentence_encoder.layers.8.self_attn_layer_norm.weight
+mean: 7.623e-02,  std: 5.049e-02,  Norm:   2.534 <- decoder.sentence_encoder.layers.8.self_attn_layer_norm.bias
+mean: 1.225e-04,  std: 5.868e-02,  Norm:  78.058 <- decoder.sentence_encoder.layers.9.self_attn.in_proj_weight
+mean: 9.422e-04,  std: 7.372e-02,  Norm:   3.538 <- decoder.sentence_encoder.layers.9.self_attn.in_proj_bias
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.9.self_attn.in_proj_left.weight
+mean: 1.112e+35,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.9.self_attn.in_proj_right.weight
+mean: 2.803e-05,  std: 3.516e-02,  Norm:  27.000 <- decoder.sentence_encoder.layers.9.self_attn.out_proj.weight
+mean:-2.932e-03,  std: 8.288e-02,  Norm:   2.297 <- decoder.sentence_encoder.layers.9.self_attn.out_proj.bias
+mean:      -inf,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.9.self_attn.out_proj_left.weight
+mean:-2.254e+35,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.9.self_attn.out_proj_right.weight
+mean:-7.906e-03,  std: 4.862e-02,  Norm:  75.667 <- decoder.sentence_encoder.layers.9.fc1.weight
+mean:-6.654e-02,  std: 8.228e-02,  Norm:   5.865 <- decoder.sentence_encoder.layers.9.fc1.bias
+mean: 9.232e-05,  std: 4.373e-02,  Norm:  67.170 <- decoder.sentence_encoder.layers.9.fc2.weight
+mean: 2.094e-03,  std: 5.595e-02,  Norm:   1.551 <- decoder.sentence_encoder.layers.9.fc2.bias
+mean:       inf,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.9.fc1_right.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.9.fc1_left.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.9.fc2_right.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.9.fc2_left.weight
+mean: 8.016e-01,  std: 6.932e-02,  Norm:  22.296 <- decoder.sentence_encoder.layers.9.final_layer_norm.weight
+mean: 3.792e-02,  std: 4.191e-02,  Norm:   1.566 <- decoder.sentence_encoder.layers.9.final_layer_norm.bias
+mean: 8.574e-01,  std: 8.839e-02,  Norm:  23.886 <- decoder.sentence_encoder.layers.9.self_attn_layer_norm.weight
+mean: 8.057e-02,  std: 4.877e-02,  Norm:   2.610 <- decoder.sentence_encoder.layers.9.self_attn_layer_norm.bias
+mean:-2.076e-04,  std: 5.872e-02,  Norm:  78.115 <- decoder.sentence_encoder.layers.10.self_attn.in_proj_weight
+mean:-1.645e-03,  std: 8.958e-02,  Norm:   4.300 <- decoder.sentence_encoder.layers.10.self_attn.in_proj_bias
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.10.self_attn.in_proj_left.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.10.self_attn.in_proj_right.weight
+mean:-9.928e-06,  std: 3.584e-02,  Norm:  27.522 <- decoder.sentence_encoder.layers.10.self_attn.out_proj.weight
+mean:-1.134e-03,  std: 7.673e-02,  Norm:   2.125 <- decoder.sentence_encoder.layers.10.self_attn.out_proj.bias
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.10.self_attn.out_proj_left.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.10.self_attn.out_proj_right.weight
+mean:-5.940e-03,  std: 4.375e-02,  Norm:  67.816 <- decoder.sentence_encoder.layers.10.fc1.weight
+mean:-5.960e-02,  std: 7.507e-02,  Norm:   5.312 <- decoder.sentence_encoder.layers.10.fc1.bias
+mean: 4.595e-05,  std: 4.103e-02,  Norm:  63.024 <- decoder.sentence_encoder.layers.10.fc2.weight
+mean: 1.961e-03,  std: 5.459e-02,  Norm:   1.513 <- decoder.sentence_encoder.layers.10.fc2.bias
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.10.fc1_right.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.10.fc1_left.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.10.fc2_right.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.10.fc2_left.weight
+mean: 7.914e-01,  std: 6.364e-02,  Norm:  22.003 <- decoder.sentence_encoder.layers.10.final_layer_norm.weight
+mean: 3.189e-02,  std: 5.042e-02,  Norm:   1.653 <- decoder.sentence_encoder.layers.10.final_layer_norm.bias
+mean: 8.069e-01,  std: 7.102e-02,  Norm:  22.448 <- decoder.sentence_encoder.layers.10.self_attn_layer_norm.weight
+mean: 6.899e-02,  std: 4.399e-02,  Norm:   2.267 <- decoder.sentence_encoder.layers.10.self_attn_layer_norm.bias
+mean: 8.596e-05,  std: 6.153e-02,  Norm:  81.846 <- decoder.sentence_encoder.layers.11.self_attn.in_proj_weight
+mean: 3.682e-04,  std: 8.335e-02,  Norm:   4.000 <- decoder.sentence_encoder.layers.11.self_attn.in_proj_bias
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.11.self_attn.in_proj_left.weight
+mean:-4.233e+34,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.11.self_attn.in_proj_right.weight
+mean: 7.608e-06,  std: 3.841e-02,  Norm:  29.501 <- decoder.sentence_encoder.layers.11.self_attn.out_proj.weight
+mean:-3.001e-03,  std: 7.980e-02,  Norm:   2.212 <- decoder.sentence_encoder.layers.11.self_attn.out_proj.bias
+mean:-3.277e+34,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.11.self_attn.out_proj_left.weight
+mean:      -inf,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.11.self_attn.out_proj_right.weight
+mean:-8.198e-03,  std: 4.524e-02,  Norm:  70.621 <- decoder.sentence_encoder.layers.11.fc1.weight
+mean:-5.360e-02,  std: 5.228e-02,  Norm:   4.150 <- decoder.sentence_encoder.layers.11.fc1.bias
+mean:-1.925e-04,  std: 3.505e-02,  Norm:  53.840 <- decoder.sentence_encoder.layers.11.fc2.weight
+mean:-3.894e-04,  std: 5.640e-02,  Norm:   1.562 <- decoder.sentence_encoder.layers.11.fc2.bias
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.11.fc1_right.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.11.fc1_left.weight
+mean:       nan,  std:       nan,  Norm:     nan <- decoder.sentence_encoder.layers.11.fc2_right.weight
+mean:       inf,  std:       inf,  Norm:     inf <- decoder.sentence_encoder.layers.11.fc2_left.weight
+mean: 7.578e-01,  std: 1.015e-01,  Norm:  21.188 <- decoder.sentence_encoder.layers.11.final_layer_norm.weight
+mean: 3.982e-02,  std: 3.315e-02,  Norm:   1.435 <- decoder.sentence_encoder.layers.11.final_layer_norm.bias
+mean: 6.972e-01,  std: 6.099e-02,  Norm:  19.395 <- decoder.sentence_encoder.layers.11.self_attn_layer_norm.weight
+mean: 8.340e-02,  std: 5.570e-02,  Norm:   2.779 <- decoder.sentence_encoder.layers.11.self_attn_layer_norm.bias
+mean: 3.523e-01,  std: 6.150e-02,  Norm:   9.910 <- decoder.sentence_encoder.emb_layer_norm.weight
+mean:-2.318e-03,  std: 7.032e-02,  Norm:   1.949 <- decoder.sentence_encoder.emb_layer_norm.bias
+mean: 1.200e-02,  std: 7.718e-02,  Norm:  17.511 <- decoder.lm_head.bias
+mean: 5.024e-03,  std: 9.995e-02,  Norm:  76.858 <- decoder.lm_head.dense.weight
+mean: 4.312e-02,  std: 5.099e-02,  Norm:   1.850 <- decoder.lm_head.dense.bias
+mean: 9.997e-01,  std: 1.897e-03,  Norm:  27.705 <- decoder.lm_head.layer_norm.weight
+mean:-8.709e-02,  std: 2.223e-01,  Norm:   6.612 <- decoder.lm_head.layer_norm.bias
+mean: 2.894e-04,  std: 2.114e-02,  Norm:   0.828 <- classification_heads.sentence_classification_head.out_proj.weight
+mean:-2.296e-02,  std: 3.260e-03,  Norm:   0.033 <- classification_heads.sentence_classification_head.out_proj.bias
+| epoch 001:    100 / 183 loss=0.940, nll_loss=0.030, ppl=1.02, wps=13040, ups=0, wpb=61950.030, bsz=1995.297, num_updates=101, lr=0.000292425, gnorm=1.190, clip=0.000, oom=0.000, wall=481, train_wall=461, accuracy=0.631664, f1=0.111264, mcc=0.0545588, acc_f1=0.371475, losses=0
+
+skipping batch with size:  600 
+
+| epoch 001 | loss 0.850 | nll_loss 0.027 | ppl 1.02 | wps 13051 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 182 | lr 0.00028635 | gnorm 1.199 | clip 0.000 | oom 0.000 | wall 867 | train_wall 832 | accuracy 0.682085 | f1 0.346745 | mcc 0.231007 | acc_f1 0.514642 | losses 0
+| epoch 001 | valid on 'valid' subset | loss 0.643 | nll_loss 0.021 | ppl 1.01 | num_updates 182 | accuracy 0.795057 | f1 0.701256 | mcc 0.551437 | acc_f1 0.748156 | losses 0
+| epoch 002:    100 / 183 loss=0.641, nll_loss=0.021, ppl=1.01, wps=13014, ups=0, wpb=61951.109, bsz=1995.059, num_updates=283, lr=0.000278775, gnorm=1.198, clip=0.000, oom=0.000, wall=1384, train_wall=1293, accuracy=0.79141, f1=0.719183, mcc=0.554579, acc_f1=0.755298, losses=0
+
+skipping batch with size:  600 
+
+| epoch 002 | loss 0.625 | nll_loss 0.020 | ppl 1.01 | wps 13030 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 364 | lr 0.0002727 | gnorm 1.199 | clip 0.000 | oom 0.000 | wall 1771 | train_wall 1664 | accuracy 0.797381 | f1 0.727938 | mcc 0.567856 | acc_f1 0.762685 | losses 0
+| epoch 002 | valid on 'valid' subset | loss 0.578 | nll_loss 0.019 | ppl 1.01 | num_updates 364 | best_accuracy 0.822754 | accuracy 0.822754 | f1 0.745172 | mcc 0.61398 | acc_f1 0.783963 | losses 0
+| epoch 003:    100 / 183 loss=0.585, nll_loss=0.019, ppl=1.01, wps=12994, ups=0, wpb=62011.089, bsz=1995.297, num_updates=465, lr=0.000265125, gnorm=1.196, clip=0.000, oom=0.000, wall=2289, train_wall=2126, accuracy=0.812743, f1=0.747233, mcc=0.599293, acc_f1=0.779986, losses=0
+
+skipping batch with size:  600 
+
+| epoch 003 | loss 0.583 | nll_loss 0.019 | ppl 1.01 | wps 13007 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 546 | lr 0.00025905 | gnorm 1.198 | clip 0.000 | oom 0.000 | wall 2676 | train_wall 2497 | accuracy 0.813575 | f1 0.74986 | mcc 0.602177 | acc_f1 0.781715 | losses 0
+| epoch 003 | valid on 'valid' subset | loss 0.554 | nll_loss 0.018 | ppl 1.01 | num_updates 546 | best_accuracy 0.832172 | accuracy 0.832172 | f1 0.770731 | mcc 0.641616 | acc_f1 0.801451 | losses 0
+| epoch 004:    100 / 183 loss=0.573, nll_loss=0.018, ppl=1.01, wps=13090, ups=0, wpb=62051.901, bsz=1996.248, num_updates=647, lr=0.000251475, gnorm=1.196, clip=0.000, oom=0.000, wall=3192, train_wall=2957, accuracy=0.818501, f1=0.755513, mcc=0.61189, acc_f1=0.787007, losses=0
+
+skipping batch with size:  600 
+
+| epoch 004 | loss 0.575 | nll_loss 0.019 | ppl 1.01 | wps 13029 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 728 | lr 0.0002454 | gnorm 1.200 | clip 0.000 | oom 0.000 | wall 3580 | train_wall 3330 | accuracy 0.817615 | f1 0.755275 | mcc 0.610968 | acc_f1 0.786386 | losses 0
+| epoch 004 | valid on 'valid' subset | loss 0.566 | nll_loss 0.018 | ppl 1.01 | num_updates 728 | best_accuracy 0.832413 | accuracy 0.832413 | f1 0.760808 | mcc 0.635608 | acc_f1 0.796611 | losses 0
+| epoch 005:    100 / 183 loss=0.578, nll_loss=0.019, ppl=1.01, wps=13023, ups=0, wpb=61980.050, bsz=1995.050, num_updates=829, lr=0.000237825, gnorm=1.207, clip=0.000, oom=0.000, wall=4097, train_wall=3791, accuracy=0.81605, f1=0.753086, mcc=0.608194, acc_f1=0.784566, losses=0
+
+skipping batch with size:  575 
+
+| epoch 005 | loss 0.574 | nll_loss 0.018 | ppl 1.01 | wps 13027 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 910 | lr 0.00023175 | gnorm 1.201 | clip 0.000 | oom 0.000 | wall 4484 | train_wall 4162 | accuracy 0.817458 | f1 0.754857 | mcc 0.61073 | acc_f1 0.786184 | losses 0
+| epoch 005 | valid on 'valid' subset | loss 0.536 | nll_loss 0.017 | ppl 1.01 | num_updates 910 | best_accuracy 0.834972 | accuracy 0.834972 | f1 0.768776 | mcc 0.643397 | acc_f1 0.801874 | losses 0
+| epoch 006:    100 / 183 loss=0.568, nll_loss=0.018, ppl=1.01, wps=13022, ups=0, wpb=61992.931, bsz=1996.465, num_updates=1011, lr=0.000224175, gnorm=1.197, clip=0.000, oom=0.000, wall=5002, train_wall=4623, accuracy=0.819409, f1=0.757441, mcc=0.614457, acc_f1=0.788424, losses=0
+
+skipping batch with size:  600 
+
+| epoch 006 | loss 0.568 | nll_loss 0.018 | ppl 1.01 | wps 13015 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 1092 | lr 0.0002181 | gnorm 1.198 | clip 0.000 | oom 0.000 | wall 5389 | train_wall 4995 | accuracy 0.819685 | f1 0.757742 | mcc 0.614908 | acc_f1 0.788664 | losses 0
+| epoch 006 | valid on 'valid' subset | loss 0.557 | nll_loss 0.018 | ppl 1.01 | num_updates 1092 | best_accuracy 0.834972 | accuracy 0.82994 | f1 0.758336 | mcc 0.630539 | acc_f1 0.794138 | losses 0
+| epoch 007:    100 / 183 loss=0.578, nll_loss=0.019, ppl=1.01, wps=13067, ups=0, wpb=61913.960, bsz=1995.812, num_updates=1193, lr=0.000210525, gnorm=1.215, clip=0.000, oom=0.000, wall=5904, train_wall=5454, accuracy=0.817048, f1=0.753336, mcc=0.610416, acc_f1=0.785194, losses=0
+
+skipping batch with size:  600 
+
+| epoch 007 | loss 0.576 | nll_loss 0.019 | ppl 1.01 | wps 13017 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 1274 | lr 0.00020445 | gnorm 1.206 | clip 0.000 | oom 0.000 | wall 6294 | train_wall 5828 | accuracy 0.816983 | f1 0.753529 | mcc 0.609716 | acc_f1 0.785284 | losses 0
+| epoch 007 | valid on 'valid' subset | loss 0.544 | nll_loss 0.018 | ppl 1.01 | num_updates 1274 | best_accuracy 0.834972 | accuracy 0.832759 | f1 0.769647 | mcc 0.640895 | acc_f1 0.801203 | losses 0
+| epoch 008:    100 / 183 loss=0.573, nll_loss=0.018, ppl=1.01, wps=13032, ups=0, wpb=61986.990, bsz=1996.554, num_updates=1375, lr=0.000196875, gnorm=1.201, clip=0.000, oom=0.000, wall=6811, train_wall=6289, accuracy=0.818633, f1=0.756151, mcc=0.613188, acc_f1=0.787393, losses=0
+
+skipping batch with size:  575 
+
+| epoch 008 | loss 0.569 | nll_loss 0.018 | ppl 1.01 | wps 13011 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 1456 | lr 0.0001908 | gnorm 1.198 | clip 0.000 | oom 0.000 | wall 7199 | train_wall 6661 | accuracy 0.819589 | f1 0.75745 | mcc 0.614822 | acc_f1 0.788521 | losses 0
+| epoch 008 | valid on 'valid' subset | loss 0.532 | nll_loss 0.017 | ppl 1.01 | num_updates 1456 | best_accuracy 0.835069 | accuracy 0.835069 | f1 0.778413 | mcc 0.65055 | acc_f1 0.806741 | losses 0
+| epoch 009:    100 / 183 loss=0.564, nll_loss=0.018, ppl=1.01, wps=13032, ups=0, wpb=61922.871, bsz=1995.515, num_updates=1557, lr=0.000183225, gnorm=1.197, clip=0.000, oom=0.000, wall=7716, train_wall=7122, accuracy=0.821148, f1=0.758989, mcc=0.617655, acc_f1=0.790066, losses=0
+
+skipping batch with size:  600 
+
+| epoch 009 | loss 0.562 | nll_loss 0.018 | ppl 1.01 | wps 13020 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 1638 | lr 0.00017715 | gnorm 1.195 | clip 0.000 | oom 0.000 | wall 8104 | train_wall 7494 | accuracy 0.822615 | f1 0.761405 | mcc 0.620905 | acc_f1 0.792003 | losses 0
+| epoch 009 | valid on 'valid' subset | loss 0.522 | nll_loss 0.017 | ppl 1.01 | num_updates 1638 | best_accuracy 0.83617 | accuracy 0.83617 | f1 0.781786 | mcc 0.65483 | acc_f1 0.808978 | losses 0
+| epoch 010:    100 / 183 loss=0.559, nll_loss=0.018, ppl=1.01, wps=13032, ups=0, wpb=61972.960, bsz=1996.426, num_updates=1739, lr=0.000169575, gnorm=1.197, clip=0.000, oom=0.000, wall=8621, train_wall=7956, accuracy=0.823571, f1=0.761675, mcc=0.622358, acc_f1=0.792623, losses=0
+
+skipping batch with size:  575 
+
+| epoch 010 | loss 0.559 | nll_loss 0.018 | ppl 1.01 | wps 13049 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 1820 | lr 0.0001635 | gnorm 1.197 | clip 0.000 | oom 0.000 | wall 9007 | train_wall 8326 | accuracy 0.824016 | f1 0.763505 | mcc 0.624177 | acc_f1 0.793798 | losses 0
+| epoch 010 | valid on 'valid' subset | loss 0.525 | nll_loss 0.017 | ppl 1.01 | num_updates 1820 | best_accuracy 0.83666 | accuracy 0.83666 | f1 0.782935 | mcc 0.656175 | acc_f1 0.809797 | losses 0
+| epoch 011:    100 / 183 loss=0.556, nll_loss=0.018, ppl=1.01, wps=13048, ups=0, wpb=62076.455, bsz=1997.119, num_updates=1921, lr=0.000155925, gnorm=1.193, clip=0.000, oom=0.000, wall=9524, train_wall=8788, accuracy=0.824817, f1=0.76443, mcc=0.625444, acc_f1=0.794625, losses=0
+
+skipping batch with size:  600 
+
+| epoch 011 | loss 0.552 | nll_loss 0.018 | ppl 1.01 | wps 13047 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 2002 | lr 0.00014985 | gnorm 1.192 | clip 0.000 | oom 0.000 | wall 9909 | train_wall 9158 | accuracy 0.826273 | f1 0.766791 | mcc 0.628854 | acc_f1 0.796544 | losses 0
+| epoch 011 | valid on 'valid' subset | loss 0.522 | nll_loss 0.017 | ppl 1.01 | num_updates 2002 | best_accuracy 0.838193 | accuracy 0.838193 | f1 0.785303 | mcc 0.659826 | acc_f1 0.811748 | losses 0
+| epoch 012:    100 / 183 loss=0.549, nll_loss=0.018, ppl=1.01, wps=13061, ups=0, wpb=61991.129, bsz=1996.842, num_updates=2103, lr=0.000142275, gnorm=1.194, clip=0.000, oom=0.000, wall=10425, train_wall=9618, accuracy=0.827812, f1=0.768954, mcc=0.63229, acc_f1=0.798384, losses=0
+
+skipping batch with size:  600 
+
+| epoch 012 | loss 0.549 | nll_loss 0.018 | ppl 1.01 | wps 13044 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 2184 | lr 0.0001362 | gnorm 1.193 | clip 0.000 | oom 0.000 | wall 10812 | train_wall 9990 | accuracy 0.828065 | f1 0.769172 | mcc 0.632667 | acc_f1 0.798611 | losses 0
+| epoch 012 | valid on 'valid' subset | loss 0.516 | nll_loss 0.017 | ppl 1.01 | num_updates 2184 | best_accuracy 0.843341 | accuracy 0.843341 | f1 0.789747 | mcc 0.668448 | acc_f1 0.816544 | losses 0
+| epoch 013:    100 / 183 loss=0.547, nll_loss=0.018, ppl=1.01, wps=13035, ups=0, wpb=62002.208, bsz=1996.109, num_updates=2285, lr=0.000128625, gnorm=1.193, clip=0.000, oom=0.000, wall=11329, train_wall=10451, accuracy=0.827908, f1=0.769165, mcc=0.632459, acc_f1=0.798535, losses=0
+
+skipping batch with size:  600 
+
+| epoch 013 | loss 0.546 | nll_loss 0.018 | ppl 1.01 | wps 13041 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 2366 | lr 0.00012255 | gnorm 1.194 | clip 0.000 | oom 0.000 | wall 11716 | train_wall 10822 | accuracy 0.828485 | f1 0.769646 | mcc 0.633577 | acc_f1 0.799091 | losses 0
+| epoch 013 | valid on 'valid' subset | loss 0.512 | nll_loss 0.016 | ppl 1.01 | num_updates 2366 | best_accuracy 0.843341 | accuracy 0.841964 | f1 0.790063 | mcc 0.667906 | acc_f1 0.816014 | losses 0
+| epoch 014:    100 / 183 loss=0.542, nll_loss=0.017, ppl=1.01, wps=13095, ups=0, wpb=61963.139, bsz=1996.030, num_updates=2467, lr=0.000114975, gnorm=1.195, clip=0.000, oom=0.000, wall=12230, train_wall=11281, accuracy=0.830024, f1=0.772124, mcc=0.637209, acc_f1=0.801075, losses=0
+
+skipping batch with size:  600 
+
+| epoch 014 | loss 0.544 | nll_loss 0.018 | ppl 1.01 | wps 13042 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 2548 | lr 0.0001089 | gnorm 1.194 | clip 0.000 | oom 0.000 | wall 12619 | train_wall 11654 | accuracy 0.829453 | f1 0.770761 | mcc 0.635418 | acc_f1 0.800077 | losses 0
+| epoch 014 | valid on 'valid' subset | loss 0.517 | nll_loss 0.017 | ppl 1.01 | num_updates 2548 | best_accuracy 0.843341 | accuracy 0.841664 | f1 0.785383 | mcc 0.662964 | acc_f1 0.813524 | losses 0
+| epoch 015:    100 / 183 loss=0.540, nll_loss=0.017, ppl=1.01, wps=13010, ups=0, wpb=61977.079, bsz=1995.683, num_updates=2649, lr=0.000101325, gnorm=1.192, clip=0.000, oom=0.000, wall=13137, train_wall=12116, accuracy=0.831458, f1=0.773935, mcc=0.639892, acc_f1=0.802696, losses=0
+
+skipping batch with size:  600 
+
+| epoch 015 | loss 0.539 | nll_loss 0.017 | ppl 1.01 | wps 13031 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 2730 | lr 9.525e-05 | gnorm 1.193 | clip 0.000 | oom 0.000 | wall 13523 | train_wall 12487 | accuracy 0.83208 | f1 0.774403 | mcc 0.641082 | acc_f1 0.803259 | losses 0
+| epoch 015 | valid on 'valid' subset | loss 0.514 | nll_loss 0.017 | ppl 1.01 | num_updates 2730 | best_accuracy 0.843341 | accuracy 0.84233 | f1 0.787583 | mcc 0.665933 | acc_f1 0.814956 | losses 0
+| epoch 016:    100 / 183 loss=0.537, nll_loss=0.017, ppl=1.01, wps=13040, ups=0, wpb=62011.218, bsz=1996.069, num_updates=2831, lr=8.7675e-05, gnorm=1.191, clip=0.000, oom=0.000, wall=14040, train_wall=12948, accuracy=0.832989, f1=0.774852, mcc=0.642455, acc_f1=0.80392, losses=0
+
+skipping batch with size:  600 
+
+| epoch 016 | loss 0.538 | nll_loss 0.017 | ppl 1.01 | wps 13033 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 2912 | lr 8.16e-05 | gnorm 1.192 | clip 0.000 | oom 0.000 | wall 14426 | train_wall 13319 | accuracy 0.832924 | f1 0.775588 | mcc 0.642803 | acc_f1 0.804241 | losses 0
+| epoch 016 | valid on 'valid' subset | loss 0.512 | nll_loss 0.016 | ppl 1.01 | num_updates 2912 | best_accuracy 0.845123 | accuracy 0.845123 | f1 0.791297 | mcc 0.671608 | acc_f1 0.81821 | losses 0
+| epoch 017:    100 / 183 loss=0.533, nll_loss=0.017, ppl=1.01, wps=12933, ups=0, wpb=62021.703, bsz=1995.198, num_updates=3013, lr=7.4025e-05, gnorm=1.193, clip=0.000, oom=0.000, wall=14948, train_wall=13784, accuracy=0.834454, f1=0.776403, mcc=0.645333, acc_f1=0.805426, losses=0
+
+skipping batch with size:  600 
+
+| epoch 017 | loss 0.534 | nll_loss 0.017 | ppl 1.01 | wps 12954 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 3094 | lr 6.795e-05 | gnorm 1.192 | clip 0.000 | oom 0.000 | wall 15336 | train_wall 14156 | accuracy 0.834238 | f1 0.7771 | mcc 0.645303 | acc_f1 0.805608 | losses 0
+| epoch 017 | valid on 'valid' subset | loss 0.505 | nll_loss 0.016 | ppl 1.01 | num_updates 3094 | best_accuracy 0.847043 | accuracy 0.847043 | f1 0.793733 | mcc 0.675633 | acc_f1 0.820388 | losses 0
+| epoch 018:    100 / 183 loss=0.532, nll_loss=0.017, ppl=1.01, wps=12989, ups=0, wpb=61982.921, bsz=1995.356, num_updates=3195, lr=6.0375e-05, gnorm=1.191, clip=0.000, oom=0.000, wall=15854, train_wall=14618, accuracy=0.835564, f1=0.779823, mcc=0.648898, acc_f1=0.807693, losses=0
+
+skipping batch with size:  600 
+
+| epoch 018 | loss 0.532 | nll_loss 0.017 | ppl 1.01 | wps 12983 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 3276 | lr 5.43e-05 | gnorm 1.190 | clip 0.000 | oom 0.000 | wall 16243 | train_wall 14990 | accuracy 0.835282 | f1 0.778917 | mcc 0.647901 | acc_f1 0.80709 | losses 0
+| epoch 018 | valid on 'valid' subset | loss 0.508 | nll_loss 0.016 | ppl 1.01 | num_updates 3276 | best_accuracy 0.847043 | accuracy 0.845485 | f1 0.790845 | mcc 0.671469 | acc_f1 0.818165 | losses 0
+| epoch 019:    100 / 183 loss=0.530, nll_loss=0.017, ppl=1.01, wps=13020, ups=0, wpb=62002.980, bsz=1995.545, num_updates=3377, lr=4.6725e-05, gnorm=1.191, clip=0.000, oom=0.000, wall=16761, train_wall=15452, accuracy=0.835078, f1=0.77833, mcc=0.64728, acc_f1=0.806705, losses=0
+
+skipping batch with size:  600 
+
+| epoch 019 | loss 0.530 | nll_loss 0.017 | ppl 1.01 | wps 13033 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 3458 | lr 4.065e-05 | gnorm 1.191 | clip 0.000 | oom 0.000 | wall 17147 | train_wall 15823 | accuracy 0.835612 | f1 0.779155 | mcc 0.648449 | acc_f1 0.807353 | losses 0
+| epoch 019 | valid on 'valid' subset | loss 0.498 | nll_loss 0.016 | ppl 1.01 | num_updates 3458 | best_accuracy 0.847859 | accuracy 0.847859 | f1 0.796391 | mcc 0.678604 | acc_f1 0.822125 | losses 0
+| epoch 020:    100 / 183 loss=0.527, nll_loss=0.017, ppl=1.01, wps=13001, ups=0, wpb=61983.010, bsz=1994.842, num_updates=3559, lr=3.3075e-05, gnorm=1.190, clip=0.000, oom=0.000, wall=17665, train_wall=16285, accuracy=0.836703, f1=0.780371, mcc=0.650604, acc_f1=0.808532, losses=0
+
+skipping batch with size:  600 
+
+| epoch 020 | loss 0.528 | nll_loss 0.017 | ppl 1.01 | wps 13045 | ups 0 | wpb 61752.180 | bsz 1988.230 | num_updates 3640 | lr 2.7e-05 | gnorm 1.190 | clip 0.000 | oom 0.000 | wall 18050 | train_wall 16655 | accuracy 0.83642 | f1 0.78036 | mcc 0.650218 | acc_f1 0.808359 | losses 0
+| epoch 020 | valid on 'valid' subset | loss 0.498 | nll_loss 0.016 | ppl 1.01 | num_updates 3640 | best_accuracy 0.847859 | accuracy 0.847488 | f1 0.797548 | mcc 0.679513 | acc_f1 0.822518 | losses 0
+| done training in 18086.4 seconds
+

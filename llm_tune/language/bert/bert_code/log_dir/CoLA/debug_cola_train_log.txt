@@ -1,0 +1,21 @@
+Namespace(no_progress_bar=True, log_interval=100, log_format=None, tensorboard_logdir='.', tbmf_wrapper=False, seed=0, cpu=False, fp16=False, fp16_no_flatten_grads=False, memory_efficient_fp16=False, fp16_init_scale=128, fp16_scale_window=None, fp16_scale_tolerance=0.0, min_loss_scale=0.0001, threshold_loss_scale=None, user_dir=None, empty_cache_freq=0, criterion='sentence_prediction', tokenizer=None, bpe=None, optimizer='adam', lr_scheduler='polynomial_decay', task='sentence_prediction', num_workers=1, skip_invalid_size_inputs_valid_test=True, max_tokens=8000, max_sentences=50, required_batch_size_multiple=1, dataset_impl=None, train_subset='train', valid_subset='valid', validate_interval=1, validate_interval_updates=1, fixed_validation_seed=None, disable_validation=False, max_tokens_valid=8000, max_sentences_valid=50, curriculum=0, distributed_world_size=1, distributed_rank=0, distributed_backend='nccl', distributed_init_method=None, distributed_port=-1, device_id=0, distributed_no_spawn=False, ddp_backend='c10d', bucket_cap_mb=25, fix_batches_to_gpus=False, find_unused_parameters=True, fast_stat_sync=False, arch='roberta_large', max_epoch=30, max_update=0, clip_norm=0.0, sentence_avg=False, update_freq=[4], lr=[0.0003], min_lr=-1, use_bmuf=False, save_dir='log_dir', restore_file='/home/eb/roberta.large/model.pt', itr_mul=1, reset_dataloader=True, reset_lr_scheduler=False, reset_meters=True, reset_optimizer=True, optimizer_overrides='{}', save_interval=1, save_interval_updates=0, keep_interval_updates=-1, keep_updates_list=[], keep_last_epochs=-1, no_save=False, no_epoch_checkpoints=True, no_last_checkpoints=True, no_best_checkpoints=True, no_save_optimizer_state=False, best_checkpoint_metric='mcc', maximize_best_checkpoint_metric=True, bert_pooler=True, rel_pos=False, rank=1, linear_eval=False, clip=1.0, sigma=0.8265, sess='debug_cola', save_predictions=None, adam_betas='(0.9,0.999)', adam_eps=1e-06, weight_decay=0.0, force_anneal=None, warmup_updates=0, warmup_ratio=0.0, end_learning_rate=0.0, power=1.0, total_num_update=4000, data='../glue_data/CoLA-bin', num_classes=2, init_token=0, separator_token=2, regression_target=False, no_shuffle=False, truncate_sequence=True, max_positions=512, dropout=0.1, attention_dropout=0.1, embedding_normalize=True, pooler_dropout=0.1, encoder_layers=24, encoder_embed_dim=1024, encoder_ffn_embed_dim=4096, encoder_attention_heads=16, activation_fn='gelu', pooler_activation_fn='tanh', activation_dropout=0.0, encoder_normalize_before=False)
+Traceback (most recent call last):
+  File "/home/eb/eclipse-workspace/yu/language/bert/bert_code/train.py", line 362, in <module>
+    cli_main()
+  File "/home/eb/eclipse-workspace/yu/language/bert/bert_code/train.py", line 358, in cli_main
+    main(args)
+  File "/home/eb/eclipse-workspace/yu/language/bert/bert_code/train.py", line 44, in main
+    task = tasks.setup_task(args)
+  File "/home/eb/eclipse-workspace/yu/language/bert/bert_code/fairseq/tasks/__init__.py", line 17, in setup_task
+    return TASK_REGISTRY[args.task].setup_task(args, **kwargs)
+  File "/home/eb/eclipse-workspace/yu/language/bert/bert_code/fairseq/tasks/sentence_prediction.py", line 78, in setup_task
+    data_dict = cls.load_dictionary(
+  File "/home/eb/eclipse-workspace/yu/language/bert/bert_code/fairseq/tasks/sentence_prediction.py", line 67, in load_dictionary
+    dictionary = Dictionary.load(filename)
+  File "/home/eb/eclipse-workspace/yu/language/bert/bert_code/fairseq/data/dictionary.py", line 192, in load
+    d.add_from_file(f, ignore_utf_errors)
+  File "/home/eb/eclipse-workspace/yu/language/bert/bert_code/fairseq/data/dictionary.py", line 209, in add_from_file
+    raise fnfe
+  File "/home/eb/eclipse-workspace/yu/language/bert/bert_code/fairseq/data/dictionary.py", line 203, in add_from_file
+    with open(f, 'r', encoding='utf-8') as fd:
+FileNotFoundError: [Errno 2] No such file or directory: '../glue_data/CoLA-bin/input0/dict.txt'
